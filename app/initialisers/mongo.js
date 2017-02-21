@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
     , Promise = require('bluebird')
     , URL = process.env.MONGODB_URL || 'mongodb://localhost:27017';
 
-exports.init = new Promise(function(resolve, reject){
+exports.init = function(cb){
 
     const options = {
 
@@ -40,15 +40,15 @@ exports.init = new Promise(function(resolve, reject){
 
     mongoose.connection.on('open', function(){
         console.log('Mongo conn open ' + URL);
-        resolve();
+        cb();
     });
 
     mongoose.connection.on('error', function(err){
-        reject(err);
+        cb(err);
     });
 
     mongoose.connect(
         URL,
         options
     );
-});
+};
