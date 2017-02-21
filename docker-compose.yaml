@@ -1,0 +1,40 @@
+version: "2"
+services:
+  nginx:
+    restart: always
+    build: ./nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - /www/public
+    volumes_from:
+      - web
+    links:
+      - web:web
+  web:
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
+    depends_on:
+      - mongo
+    volumes:
+      - ./:/app
+    ports:
+      - "32768:3000"
+    environment:
+      NODE_ENV: development
+      MONGODB_URL: mongodb://mongo:27017
+      PORT: 3000
+    links:
+      - mongo
+  mongo:
+    image: mongo:latest
+    command: mongod --smallfiles --dbpath /data/db --nojournal --oplogSize 16 --noauth
+    ports:
+      - "27017:27017"
+    volumes_from:
+      - mongodata
+  mongodata:
+    image: tianon/true
+    volumes:
+      - /data/db
