@@ -4,3 +4,6 @@ Build and run all images in the stack:
 ```
 docker-compose up --build
 ```
+
+Once running app is available on:
+http://localhost:8080/
