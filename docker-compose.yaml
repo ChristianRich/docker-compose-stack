@@ -17,6 +17,7 @@ services:
       dockerfile: ./app/Dockerfile
     depends_on:
       - mongo
+      - redis
     volumes:
       - ./:/app
     ports:
@@ -24,6 +25,7 @@ services:
     environment:
       NODE_ENV: development
       MONGODB_URL: mongodb://mongo:27017
+      REDIS_PORT: 6379
       PORT: 3000
     links:
       - mongo
@@ -34,7 +36,15 @@ services:
       - "27017:27017"
     volumes_from:
       - mongodata
+    depends_on:
+      - redis
   mongodata:
     image: tianon/true
     volumes:
       - /data/db
+  redis:
+    image: redis
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "6379"

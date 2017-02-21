@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-    , Promise = require('bluebird')
     , async = require('async')
     , models = require('../models');
 

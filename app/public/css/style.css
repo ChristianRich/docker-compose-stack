@@ -61,3 +61,7 @@
 .demo-footer .mdl-mini-footer--link-list a {
   font-size: 13px;
 }
+
+pre{
+    white-space: pre-wrap !important;
+}

@@ -1,4 +1,5 @@
 const mongo = require('./mongo')
+    , redis = require('./redis')
     , createCustomerRecords = require('./createCustomerRecords')
     , async = require('async');
 
@@ -8,6 +9,7 @@ exports.run = function(app){
 
         const tasks = [
             mongo.init,
+            redis.init,
             createCustomerRecords.init
         ];
 
