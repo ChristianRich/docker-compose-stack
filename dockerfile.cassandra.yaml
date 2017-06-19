@@ -1,0 +1,5 @@
+FROM cassandra:3.10
+ENTRYPOINT cqlsh "CREATE KEYSPACE leonardo WITH REPLICATION = { 'class' : 'SimpleStrategy', 'datacenter1' : 1 }";
+# CMD
+#RUN cqlsh "USE leonardo";
+
