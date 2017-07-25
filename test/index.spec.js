@@ -1,6 +1,5 @@
-describe('dummy', function(){
+import test from 'ava';
 
-    it('', (done) => {
-        done();
-    });
+test('/dummy', async(t) => {
+    t.true(true);
 });
